@@ -16,58 +16,58 @@ const GithubProvider = ({ children }) => {
   const [requests, setRequests] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   //error
-  const [error, setError] = useState({show: false, msg: ""});
-  
-const searchGithubUser = async(user) => {
-  toggleError();
-  setIsLoading(true)
-  const response = await axios(`${rootUrl}/users/${user}`)
-    .catch(err => console.log(error));
-    console.log(response);
-    if(response){
-      setGithubUser(response.data);
-      const {login, followers_url} = response.data;
-      // repos
-      axios(`${rootUrl}/users/${login}/repos?per_page100`)
-        .then(response =>
-          setRepos(response.data)
-          );
-      // followers
-        axios(`${followers_url}?per_page=100`)
-          .then(response => 
-            setFollowers(response.data)
-          );
-      
+  const [error, setError] = useState({ show: false, msg: "" });
 
+  const searchGithubUser = async (user) => {
+    toggleError();
+    setIsLoading(true)
+    const response = await axios(`${rootUrl}/users/${user}`)
+      .catch(err => console.log(error));
+    if (response) {
+      setGithubUser(response.data);
+      const { login, followers_url } = response.data;
+
+      await Promise.allSettled(
+        [
+          axios(`${rootUrl}/users/${login}/repos?per_page100`),
+          axios(`${followers_url}?per_page=100`)])
+        .then((results) => {
+          const [repos, followers] = results;
+          const status = 'fulfilled';
+          if (repos.status === status) {
+            setRepos(repos.value.data);
+          }
+          if (followers.status === status) {
+            setFollowers(followers.value.data);
+          }
+        }).catch(err => console.log(err));
     }
-    else{
+    else {
       toggleError(true, 'there is no user with that username');
     }
     checkRequests();
     setIsLoading(false);
-}
+  }
 
   //check rate
   const checkRequests = () => {
     axios(`${rootUrl}/rate_limit`)
-      .then(({data})=>{
-        console.log(data);
+      .then(({ data }) => {
         let {
-          rate:{remaining}
+          rate: { remaining }
         } = data;
         setRequests(remaining);
-        console.log(remaining);
-        if(remaining === 0){
+        if (remaining === 0) {
           toggleError(true, 'sorry, you have exceeded your hourly rate limit!');
         }
       })
       .catch(err => console.log(err));
   };
-  function toggleError(show = false, msg = ''){
-    setError({show, msg});
+  function toggleError(show = false, msg = '') {
+    setError({ show, msg });
   }
   //error
-  useEffect(checkRequests,[]);
+  useEffect(checkRequests, []);
 
   return (
     <GithubContext.Provider
@@ -76,7 +76,6 @@ const searchGithubUser = async(user) => {
         repos,
         mockFollowers,
         followers,
-        repos,
         requests,
         error,
         searchGithubUser,
