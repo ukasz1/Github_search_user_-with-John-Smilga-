@@ -1,6 +1,6 @@
 ## See online
 
-To see this project online navigate to: https://ukasz1-react-search-github-users.netlify.app
+To see this project online navigate [here](https://ukasz1-react-search-github-users.netlify.app)
 
 ## Starter Project
 
@@ -10,11 +10,4 @@ This is a project done under the guidance of John Smilga's react course. Start t
 - all imports included (warnings)
 - index.js for easier imports
 
-  For unauthenticated requests, the rate limit allows for up to 60 requests per hour. Unauthenticated requests are associated with the originating IP address, and not the user making requests.
-
-## Fusion Charts
-
-- [Fusion Charts - Main Docs](https://www.fusioncharts.com/)
-- [First React Chart](https://www.fusioncharts.com/dev/getting-started/react/your-first-chart-using-react)
-- [List Of Charts](https://www.fusioncharts.com/dev/chart-guide/list-of-charts)
-- [Themes](https://www.fusioncharts.com/dev/themes/introduction-to-themes)
+For unauthenticated requests, the rate limit allows for up to 60 requests per hour. Unauthenticated requests are associated with the originating IP address, and not the user making requests.
