@@ -1,3 +1,7 @@
+## See online
+
+To see this project online navigate to: https://ukasz1-react-search-github-users.netlify.app
+
 ## Starter Project
 
 This is a project done under the guidance of John Smilga's react course. Start template: https://github.com/john-smilga/starter-project-react-github-search-users. These are the details about that template:
