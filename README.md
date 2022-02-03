@@ -1,6 +1,14 @@
+# Search GitHub users
+
+A search GitHub profiles using GitHub API and [FusionCharts.js](https://www.fusioncharts.com/). 
+
 ## See online
 
 To see this project online navigate [here](https://ukasz1-react-search-github-users.netlify.app)
+
+## App view
+<img src="https://github.com/ukasz1/Github_search_user_with_John_Smilga/blob/master/App%20view/appview1.PNG" width="70%" />
+<img src="https://github.com/ukasz1/Github_search_user_with_John_Smilga/blob/master/App%20view/appview2.PNG" width="70%" />
 
 ## Starter Project
 
